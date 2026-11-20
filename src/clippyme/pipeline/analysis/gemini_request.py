@@ -274,7 +274,7 @@ JSON formatting rules (violating = parse failure):
 - Escape every backslash as \\\\ inside strings
 - Use straight double quotes " only — NO curly/smart quotes
 - No trailing commas before }} or ]
-- Strings stay on a single line (no raw \\n mid-string)
+- Strings stay on a single line (no raw \n mid-string)
 - Every description ENDS with a conversation opener: a genuine question or a
   debatable opinion about what just happened ("Voi l'avreste venduto?", "Per me
   ha sbagliato, ditemi che sbaglio"). Never a mechanical CTA ("commenta X e ti
