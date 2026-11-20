@@ -16,3 +16,8 @@ test('saved presets retain their AI instructions', () => {
   const instructions = 'Prioritize clean clutch plays and authentic reactions.';
   expect(captureOpts({ instructions })).toEqual({ instructions });
 });
+
+test('saved presets retain campaign briefs', () => {
+  const campaignBrief = 'Use clips under 60 seconds and include #CampaignTag.';
+  expect(captureOpts({ campaignBrief })).toEqual({ campaignBrief });
+});
