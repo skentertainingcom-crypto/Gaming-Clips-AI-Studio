@@ -432,7 +432,7 @@ def build_viral_prompt(transcript_result, video_duration, instructions=None, cre
     if gaming_mode_block:
         prompt = prompt.replace(
             "</user_instructions>",
-            "</user_instructions>\\n" + gaming_mode_block.strip(),
+            "</user_instructions>\n" + gaming_mode_block.strip(),
             1,
         )
     return prompt, words
