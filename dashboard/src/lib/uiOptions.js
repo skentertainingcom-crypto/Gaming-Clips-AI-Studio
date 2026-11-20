@@ -2,6 +2,15 @@
 
 export const PRESETS = [
   {
+    id: 'gaming', icon: 'gamepad-2', title: 'Gaming highlights',
+    desc: 'Clutch plays, funny fails, big reactions & clean vertical clips.',
+    opts: {
+      clips: 8, aspect: '9:16', reframeMode: 'auto', detect: true, smartcut: true, zoom: false,
+      subtitles: true, subMode: 'karaoke', subPreset: 'fire_impact', hooks: true,
+      instructions: 'Act as an expert gaming-stream highlights editor. Prioritize genuinely memorable moments: clutch wins, near-impossible plays, funny mistakes, unexpected reversals, impressive skill, close calls, surprising reveals, and authentic streamer or co-player reactions. Include enough lead-in to understand the play and keep the complete payoff and reaction. Prefer moments that make sense without the full stream. Reject routine gameplay, menus, loading screens, long dead air, repetitive action, and moments whose payoff is missing. Do not invent game titles, player identities, scores, ranks, stakes, or outcomes. Do not attribute speech or actions to a named person unless the source clearly establishes it. Write hooks and metadata in the transcript language, keep them accurate to the clip, and avoid misleading clickbait. Only process footage the account owner is authorized to edit and submit.'
+    },
+  },
+  {
     id: 'viral', icon: 'flame', title: 'Viral pack',
     desc: 'Best moments, karaoke subs, hooks & smart-cut.',
     opts: { clips: 7, aspect: '9:16', reframeMode: 'auto', detect: true, smartcut: true, zoom: true,
