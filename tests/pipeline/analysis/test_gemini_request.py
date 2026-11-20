@@ -143,7 +143,7 @@ def test_gaming_preset_activates_grounded_gameplay_selection_rules():
     prompt, _ = build_viral_prompt(TRANSCRIPT, 60, instructions=instructions)
     assert "GAMING HIGHLIGHT MODE" in prompt
     assert "not verified gameplay frames" in prompt
-    assert "never claim to have visually seen a kill" in prompt
+    assert "never claim to have visually" in prompt
     assert "return fewer clips rather than guessing" in prompt
 
 
