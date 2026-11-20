@@ -135,6 +135,25 @@ def test_creator_block_only_when_given_and_sanitised():
     assert len(owner_line) <= 64
 
 
+def test_gaming_preset_activates_grounded_gameplay_selection_rules():
+    instructions = (
+        "Act as an expert gaming-stream highlights editor. "
+        "Prioritize clutch wins and authentic reactions."
+    )
+    prompt, _ = build_viral_prompt(TRANSCRIPT, 60, instructions=instructions)
+    assert "GAMING HIGHLIGHT MODE" in prompt
+    assert "not verified gameplay frames" in prompt
+    assert "never claim to have visually seen a kill" in prompt
+    assert "return fewer clips rather than guessing" in prompt
+
+
+def test_campaign_brief_cannot_activate_gaming_system_rules():
+    prompt, _ = build_viral_prompt(
+        TRANSCRIPT, 60, instructions="Campaign rules: choose short moments."
+    )
+    assert "GAMING HIGHLIGHT MODE" not in prompt
+
+
 def test_prompt_gates_on_clip_worthiness_before_scoring():
     # The rubric alone scores *how good* a moment is; the gate decides whether
     # it is a clip at all. The gate must come first or flat moments score in.
