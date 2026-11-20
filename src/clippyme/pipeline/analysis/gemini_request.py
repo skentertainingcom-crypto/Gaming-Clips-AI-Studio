@@ -408,7 +408,7 @@ def build_viral_prompt(transcript_result, video_duration, instructions=None, cre
         # Only activate the trusted gaming rubric for the built-in Gaming
         # Highlights preset marker; arbitrary pasted campaign text cannot
         # enable or rewrite this system-level guidance.
-        if "expert gaming-stream highlights editor" in safe_instructions.lower():
+        if "expert gaming-stream highlights editor" in str(instructions).lower():
             gaming_mode_block = GAMING_HIGHLIGHT_RULES
 
     creator_block = ""
