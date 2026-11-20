@@ -354,6 +354,29 @@ def encode_words_toon(words):
     return "\n".join(lines)
 
 
+GAMING_HIGHLIGHT_RULES = """
+GAMING HIGHLIGHT MODE (apply when the user selected Gaming highlights):
+- Select moments only when the transcript or supplied source context supports a
+  specific play, reaction, or event. This request contains transcript text and
+  word timestamps, not verified gameplay frames: never claim to have visually
+  seen a kill, win, score, rank, item, match result, or on-screen event unless
+  it is explicitly described in the available evidence.
+- Prefer a complete gameplay beat: brief setup or callout, the decisive moment
+  as described in the evidence, then the immediate reaction or consequence.
+  Keep the setup and payoff together; do not cut so tightly that the play is
+  incomprehensible.
+- Strong candidates include clutch situations, close calls, surprising
+  reversals, skilled plays, funny mistakes, team coordination, and spontaneous
+  reactions. A loud reaction alone is not proof of a successful play.
+- Reject routine commentary, repeated filler, menus/loading discussion, long
+  gaps, and unsupported claims about who won or what happened.
+- If the transcript does not establish enough context for a reliable gaming
+  moment, return fewer clips rather than guessing. Keep all metadata grounded
+  in the actual clip and transcript language.
+</gaming_highlight_rules>
+"""
+
+
 def build_viral_prompt(transcript_result, video_duration, instructions=None, creator=None):
     """Return ``(prompt, words)`` for the primary Gemini call.
 
@@ -368,6 +391,7 @@ def build_viral_prompt(transcript_result, video_duration, instructions=None, cre
     words = extract_prompt_words(transcript_result)
 
     user_instructions_block = ""
+    gaming_mode_block = ""
     if instructions:
         # Treat user instructions as untrusted: strip the output delimiter so a
         # crafted directive can't forge the "### JSON ###" section the parser
@@ -381,6 +405,11 @@ def build_viral_prompt(transcript_result, video_duration, instructions=None, cre
             f"{safe_instructions}\n"
             "</user_instructions>"
         )
+        # Only activate the trusted gaming rubric for the built-in Gaming
+        # Highlights preset marker; arbitrary pasted campaign text cannot
+        # enable or rewrite this system-level guidance.
+        if "expert gaming-stream highlights editor" in safe_instructions.lower():
+            gaming_mode_block = GAMING_HIGHLIGHT_RULES
 
     creator_block = ""
     safe_creator = str(creator or "").replace("### JSON ###", "").strip()[:64]
@@ -400,6 +429,13 @@ def build_viral_prompt(transcript_result, video_duration, instructions=None, cre
         user_instructions_block=user_instructions_block,
         creator_block=creator_block,
     )
+    if gaming_mode_block:
+        prompt = prompt.replace("{user_instructions_block}", user_instructions_block)
+        prompt = prompt.replace(
+            "</user_instructions>",
+            "</user_instructions>\\n" + gaming_mode_block.strip(),
+            1,
+        )
     return prompt, words
 
 
