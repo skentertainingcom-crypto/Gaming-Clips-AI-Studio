@@ -154,6 +154,15 @@ def test_campaign_brief_cannot_activate_gaming_system_rules():
     assert "GAMING HIGHLIGHT MODE" not in prompt
 
 
+def test_long_campaign_brief_does_not_hide_gaming_preset_marker():
+    instructions = (
+        "CAMPAIGN BRIEF: " + ("requirements " * 250)
+        + "\\nAct as an expert gaming-stream highlights editor."
+    )
+    prompt, _ = build_viral_prompt(TRANSCRIPT, 60, instructions=instructions)
+    assert "GAMING HIGHLIGHT MODE" in prompt
+
+
 def test_prompt_gates_on_clip_worthiness_before_scoring():
     # The rubric alone scores *how good* a moment is; the gate decides whether
     # it is a clip at all. The gate must come first or flat moments score in.
