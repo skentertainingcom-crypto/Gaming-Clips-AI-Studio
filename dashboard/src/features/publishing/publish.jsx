@@ -115,7 +115,11 @@ export function PublishModal({ clips, jobId, clipStates = {}, preselections, onC
   const toggle = (k) => setPlats((p) => ({ ...p, [k]: !p[k] }));
   const platTargets = () => Object.keys(plats)
     .filter((k) => plats[k] && accounts[PLAT[k].acct])
-    .map((k) => ({ platform: PLAT[k].platform, accountId: accounts[PLAT[k].acct] }));
+    .map((k) => ({
+      platform: PLAT[k].platform,
+      accountId: accounts[PLAT[k].acct],
+      ...(k === 'fb' ? { platformSpecificData: { contentType: 'reel' } } : {}),
+    }));
   const targets = platTargets();
   const ready = zernio?.configured && targets.length > 0;
 
