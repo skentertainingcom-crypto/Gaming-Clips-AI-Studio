@@ -68,8 +68,8 @@ test('Facebook Reels can be selected and is sent as a Facebook target', async ()
     configured: true, accounts: { facebook: 'facebook-account' }, timezone: 'Asia/Kolkata',
   });
   mount();
+  await waitFor(() => expect(screen.getByRole('button', { name: /Facebook Reels/ })).toBeEnabled());
   const facebook = screen.getByRole('button', { name: /Facebook Reels/ });
-  await waitFor(() => expect(facebook).toBeEnabled());
   fireEvent.click(facebook);
   const publishNow = screen.getByRole('button', { name: 'Publish now' });
   await waitFor(() => expect(publishNow).toBeEnabled());
