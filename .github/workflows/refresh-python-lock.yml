@@ -38,7 +38,7 @@ jobs:
           --python-version 3.11
           --index-url https://download.pytorch.org/whl/cu126
           --extra-index-url https://pypi.org/simple
-          --index-strategy first-index
+          --index-strategy unsafe-best-match
           -o requirements.lock
 
       - name: Confirm lock resolves and audit dependencies
