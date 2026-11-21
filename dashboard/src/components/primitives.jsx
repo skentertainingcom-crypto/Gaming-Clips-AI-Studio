@@ -79,8 +79,9 @@ export function Panel({ title, sub, icon, headRight, pad = true, children, class
 
 export const PLATFORMS = [
   { id: 'tiktok', icon: 'tiktok', label: 'TikTok' },
-  { id: 'ig', icon: 'instagram', label: 'Reels' },
-  { id: 'yt', icon: 'youtube', label: 'Shorts' },
+  { id: 'ig', icon: 'instagram', label: 'Instagram Reels' },
+  { id: 'yt', icon: 'youtube', label: 'YouTube Shorts' },
+  { id: 'fb', icon: 'facebook', label: 'Facebook Reels' },
 ];
 
 export function PlatPill({ id, icon, label, on, onClick }) {
