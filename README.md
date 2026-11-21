@@ -6,8 +6,8 @@
   <p><b>Turn long videos into vertical shorts, on your own machine.</b></p>
 
   <p>
-    <a href="https://github.com/fralapo/clippyme/actions/workflows/ci.yml"><img src="https://github.com/fralapo/clippyme/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI" /></a>
-    <img src="https://img.shields.io/github/license/fralapo/clippyme?color=3b82f6" alt="MIT license" />
+    <a href="https://github.com/skentertainingcom-crypto/Gaming-Clips-AI-Studio/actions/workflows/ci.yml"><img src="https://github.com/skentertainingcom-crypto/Gaming-Clips-AI-Studio/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI" /></a>
+    <img src="https://img.shields.io/github/license/skentertainingcom-crypto/Gaming-Clips-AI-Studio?color=3b82f6" alt="MIT license" />
     <img src="https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white" alt="Python 3.11" />
   </p>
 </div>
