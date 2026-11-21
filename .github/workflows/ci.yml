@@ -196,7 +196,8 @@ jobs:
 
   browser-e2e:
     name: Browser E2E (Playwright Chromium)
-    runs-on: ubuntu-latest
+    # Playwright 1.60 does not yet support Ubuntu 26.04 (ubuntu-latest).
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     defaults:
       run:
