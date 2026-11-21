@@ -17,7 +17,7 @@ attrs==26.1.0
     # via mediapipe
 av==17.1.0
     # via faster-whisper
-certifi==2026.6.17
+certifi==2026.10.23
     # via
     #   curl-cffi
     #   httpcore
@@ -57,7 +57,7 @@ fastapi==0.135.3
     # via -r requirements.txt
 faster-whisper==1.2.1
     # via -r requirements.txt
-filelock==3.29.4
+filelock==4.2.1
     # via
     #   huggingface-hub
     #   torch
@@ -200,7 +200,7 @@ packaging==26.2
     #   huggingface-hub
     #   matplotlib
     #   onnxruntime
-pillow==12.3.0
+pillow==13.0.0
     # via
     #   -r requirements.txt
     #   matplotlib
@@ -220,7 +220,7 @@ psutil==7.0.0
     # via
     #   -r requirements.txt
     #   ultralytics
-pyasn1==0.6.4
+pyasn1==0.6.5
     # via pyasn1-modules
 pyasn1-modules==0.4.2
     # via google-auth
@@ -264,7 +264,7 @@ scipy==1.17.1
     #   jax
     #   jaxlib
     #   ultralytics
-setuptools==81.0.0
+setuptools==84.1.0
     # via
     #   ctranslate2
     #   torch
