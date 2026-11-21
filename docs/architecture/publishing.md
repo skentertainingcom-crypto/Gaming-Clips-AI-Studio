@@ -1,7 +1,9 @@
 # Publishing
 
-ClippyMe publishes to TikTok, Instagram and YouTube through
-[Zernio](https://zernio.com). Clips are published manually from the dashboard,
+ClippyMe publishes to TikTok, Instagram, YouTube and Facebook Reels through
+[Zernio](https://zernio.com). The Facebook destination uses the connected Facebook
+account ID discovered or entered in Settings; availability and permissions remain
+subject to the connected account and Zernio's current platform requirements. Clips are published manually from the dashboard,
 or automatically by the [live monitor](live-monitor.md).
 
 ## Manual publish
