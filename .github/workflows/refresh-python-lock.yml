@@ -1,0 +1,82 @@
+name: Refresh Python dependency lock
+
+on:
+  push:
+    branches:
+      - feat/gaming-highlight-workflow-phase-1
+    paths:
+      - requirements.txt
+      - .github/workflows/refresh-python-lock.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-python-lock-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  refresh-and-validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install lock and audit tools
+        run: python -m pip install --upgrade pip uv pip-audit
+
+      - name: Regenerate Linux Python 3.11 lock
+        run: >-
+          uv pip compile requirements.txt
+          --python-platform linux
+          --python-version 3.11
+          --index-url https://download.pytorch.org/whl/cu126
+          --extra-index-url https://pypi.org/simple
+          --index-strategy first-index
+          -o requirements.lock
+
+      - name: Confirm lock resolves and audit dependencies
+        run: |
+          grep -E '^(torch|torchvision|setuptools)==' requirements.lock
+          pip-audit -r requirements.lock --desc \
+            --ignore-vuln CVE-2025-3000 \
+            --ignore-vuln PYSEC-2026-1805 \
+            --ignore-vuln PYSEC-2026-3447
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build CPU backend image with the regenerated lock
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: clippyme-backend:lock-validation
+          build-args: |
+            GPU_RUNTIME=cpu
+            ENABLE_WHISPER_DIARIZE=0
+
+      - name: Run backend integration tests in the built image
+        run: >-
+          docker run --rm -u root --entrypoint sh
+          clippyme-backend:lock-validation
+          -lc "pip install -q pytest && pytest -m integration -q"
+
+      - name: Commit regenerated lock on the feature branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add requirements.lock
+          if git diff --cached --quiet; then
+            echo "requirements.lock is already current."
+            exit 0
+          fi
+          git commit -m "Regenerate Python lock for PyTorch CUDA 12.6"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
