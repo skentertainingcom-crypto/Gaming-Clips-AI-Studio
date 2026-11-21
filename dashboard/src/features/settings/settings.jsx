@@ -275,6 +275,7 @@ export function SettingsView({ apiKey, onApiKey, cookiesConfigured, onCookiesCha
                 value={accts[p] || ''} placeholder={`${p} account id`} onChange={(e) => setAccts((a) => ({ ...a, [p]: e.target.value }))} />
             ))}
           </div>
+          <div className="od">Facebook Reels requires a connected Facebook Page with publishing permission. The account must be eligible for Reels.</div>
           <div style={{ display: 'flex', gap: 10 }}>
             <Btn variant="secondary" size="sm" icon="rss" onClick={discover}>Discover from Zernio</Btn>
             <Btn variant="primary" size="sm" icon="check" onClick={saveZernioCfg}>Save</Btn>
