@@ -15,10 +15,11 @@ from clippyme.api.schemas import PublishRequest, ZernioConfigRequest
 def test_zernio_accepts_normal_config():
     req = ZernioConfigRequest(
         api_key="sk_live_abc123",
-        accounts={"tiktok": "acc1", "youtube": "acc2", "instagram": None},
+        accounts={"tiktok": "acc1", "youtube": "acc2", "instagram": None, "facebook": "fb-acc"},
         timezone="Europe/Rome",
     )
     assert req.accounts["tiktok"] == "acc1"
+    assert req.accounts["facebook"] == "fb-acc"
 
 
 def test_zernio_accepts_empty():
@@ -44,6 +45,16 @@ def test_zernio_rejects_too_many_accounts():
 def test_zernio_rejects_unknown_platform():
     with pytest.raises(ValidationError):
         ZernioConfigRequest(accounts={"myspace": "a"})
+
+
+def test_zernio_accepts_facebook_publish_target():
+    req = PublishRequest(platforms=[{"platform": "facebook", "accountId": "fb-acc"}])
+    assert req.platforms[0]["platform"] == "facebook"
+
+
+def test_zernio_rejects_unknown_publish_target():
+    with pytest.raises(ValidationError):
+        PublishRequest(platforms=[{"platform": "myspace", "accountId": "acc"}])
 
 
 def test_zernio_rejects_oversized_account_id():
