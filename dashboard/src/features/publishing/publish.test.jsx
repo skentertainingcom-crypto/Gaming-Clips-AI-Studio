@@ -76,7 +76,7 @@ test('Facebook Reels can be selected and is sent as a Facebook target', async ()
   fireEvent.click(publishNow);
   await waitFor(() => expect(publishClip).toHaveBeenCalledTimes(1));
   expect(publishClip.mock.calls[0][2].platforms).toEqual([
-    { platform: 'facebook', accountId: 'facebook-account' },
+    { platform: 'facebook', accountId: 'facebook-account', platformSpecificData: { contentType: 'reel' } },
   ]);
 });
 
