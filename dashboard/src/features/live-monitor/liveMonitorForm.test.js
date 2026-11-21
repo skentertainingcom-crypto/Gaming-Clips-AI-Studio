@@ -28,6 +28,7 @@ const PLAT_MAP = {
   tiktok: { platform: 'tiktok', acct: 'tiktok' },
   ig: { platform: 'instagram', acct: 'instagram' },
   yt: { platform: 'youtube', acct: 'youtube' },
+  fb: { platform: 'facebook', acct: 'facebook' },
 };
 
 test('buildPlatformTargets: only toggled AND configured accounts pass through', () => {
@@ -37,6 +38,19 @@ test('buildPlatformTargets: only toggled AND configured accounts pass through', 
     PLAT_MAP,
   );
   assert.deepEqual(targets, [{ platform: 'tiktok', accountId: 'tt-id' }]);
+});
+
+test('buildPlatformTargets: Facebook target is explicitly a Reel', () => {
+  const targets = buildPlatformTargets(
+    { fb: true },
+    { facebook: 'fb-page-account' },
+    PLAT_MAP,
+  );
+  assert.deepEqual(targets, [{
+    platform: 'facebook',
+    accountId: 'fb-page-account',
+    platformSpecificData: { contentType: 'reel' },
+  }]);
 });
 
 test('buildPlatformTargets: empty when nothing toggled or nothing configured', () => {
