@@ -15,7 +15,7 @@
 ClippyMe is a self-hosted web app for creators and editors. Give it a YouTube
 link or a video file; it finds the moments worth sharing, cuts them into 9:16
 clips with captions, and lets you polish and publish them to TikTok,
-Instagram and YouTube. It can also watch Kick, Twitch and YouTube channels and
+Instagram, YouTube and Facebook Reels. It can also watch Kick, Twitch and YouTube channels and
 do all of that automatically.
 
 ## What it does
