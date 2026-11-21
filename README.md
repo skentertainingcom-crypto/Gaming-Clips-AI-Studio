@@ -61,8 +61,8 @@ overview](docs/architecture/overview.md) explains the design.
 You need Docker with Compose v2. Then:
 
 ```bash
-git clone https://github.com/fralapo/clippyme.git
-cd clippyme
+git clone https://github.com/skentertainingcom-crypto/Gaming-Clips-AI-Studio.git
+cd Gaming-Clips-AI-Studio
 docker compose up --build
 ```
 
