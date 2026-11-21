@@ -64,7 +64,7 @@ export function SettingsView({ apiKey, onApiKey, cookiesConfigured, onCookiesCha
   const [present, setPresent] = useState({});
   const [zernio, setZernioState] = useState(null);
   const [zKey, setZKey] = useState('');
-  const [accts, setAccts] = useState({ tiktok: '', instagram: '', youtube: '' });
+  const [accts, setAccts] = useState({ tiktok: '', instagram: '', youtube: '', facebook: '' });
   const [cookies, setCookies] = useState(!!cookiesConfigured);
   const [logoOn, setLogoOn] = useState(false);
   const [fonts, setFonts] = useState([]);
@@ -107,7 +107,7 @@ export function SettingsView({ apiKey, onApiKey, cookiesConfigured, onCookiesCha
 
   useEffect(() => {
     refreshConfig().then(loadModels);
-    getZernio().then((z) => { setZernioState(z); if (z.accounts) setAccts({ tiktok: '', instagram: '', youtube: '', ...z.accounts }); }).catch(() => {});
+    getZernio().then((z) => { setZernioState(z); if (z.accounts) setAccts({ tiktok: '', instagram: '', youtube: '', facebook: '', ...z.accounts }); }).catch(() => {});
     cookiesStatus().then((s) => setCookies(!!s.configured)).catch(() => {});
     logoStatus().then((s) => setLogoOn(!!s.configured)).catch(() => {});
     listFonts().then(({ fonts: f }) => setFonts(Array.isArray(f) ? f : [])).catch(() => {});
@@ -143,6 +143,7 @@ export function SettingsView({ apiKey, onApiKey, cookiesConfigured, onCookiesCha
         if (p.includes('tiktok')) next.tiktok = id;
         else if (p.includes('insta')) next.instagram = id;
         else if (p.includes('you')) next.youtube = id;
+        else if (p.includes('facebook') || p === 'fb') next.facebook = id;
       });
       setAccts(next);
       pushToast?.('success', `Discovered ${(accounts || []).length} accounts`);
@@ -267,8 +268,8 @@ export function SettingsView({ apiKey, onApiKey, cookiesConfigured, onCookiesCha
           <input className="key-input" style={{ width: '100%' }} type="password" value={zKey}
             aria-label="Zernio API key"
             placeholder={zernio?.configured ? 'Replace API key (optional)' : 'Zernio API key (sk_…)'} onChange={(e) => setZKey(e.target.value)} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8 }}>
-            {['tiktok', 'instagram', 'youtube'].map((p) => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: 8 }}>
+            {['tiktok', 'instagram', 'youtube', 'facebook'].map((p) => (
               <input key={p} className="key-input" style={{ width: '100%', fontFamily: 'var(--font-sans)' }}
                 aria-label={`${p} account id`}
                 value={accts[p] || ''} placeholder={`${p} account id`} onChange={(e) => setAccts((a) => ({ ...a, [p]: e.target.value }))} />
