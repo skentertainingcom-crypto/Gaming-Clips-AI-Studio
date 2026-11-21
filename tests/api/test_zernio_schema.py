@@ -48,8 +48,13 @@ def test_zernio_rejects_unknown_platform():
 
 
 def test_zernio_accepts_facebook_publish_target():
-    req = PublishRequest(platforms=[{"platform": "facebook", "accountId": "fb-acc"}])
+    req = PublishRequest(platforms=[{
+        "platform": "facebook",
+        "accountId": "fb-acc",
+        "platformSpecificData": {"contentType": "reel"},
+    }])
     assert req.platforms[0]["platform"] == "facebook"
+    assert req.platforms[0]["platformSpecificData"]["contentType"] == "reel"
 
 
 def test_zernio_rejects_unknown_publish_target():
