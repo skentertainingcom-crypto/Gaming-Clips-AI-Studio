@@ -1,14 +1,13 @@
-# CV/ML stack is pinned-exact for reproducible Docker builds. torch 2.11 /
-# mediapipe 0.10.14 are aging; UPGRADE PROCEDURE (do in Docker, one bump at a
-# time, then run `pytest -m integration`): bump torch>=2.4 + matching
-# torchvision, rebuild the CUDA image, verify YOLO + MediaPipe load and a clip
-# reframes correctly before committing the new pin.
+# CV/ML stack is pinned-exact for reproducible Docker builds. PyTorch 2.14.1 /
+# TorchVision 0.29.1 use the official CUDA 12.6 wheels to match the NVIDIA
+# runtime base. MediaPipe 0.10.14 remains pinned; validate the full Docker
+# integration suite whenever this ML stack is changed.
 # 0.7.2 permits patched Click >=8.3.3; the old 0.6.7.1 required <8.3.
 # Scene/timecode API changed in 0.7: Docker integration must validate behavior.
 scenedetect==0.7.2
 ultralytics==8.4.33
-torch==2.11.0
-torchvision==0.26.0
+torch==2.14.1+cu126
+torchvision==0.29.1+cu126
 tqdm==4.67.3
 # Floor raised to 2026.6.9: that release fixes CVE-2026-50023 (dangerous
 # file-type creation via insufficient filename sanitization, bypass of
