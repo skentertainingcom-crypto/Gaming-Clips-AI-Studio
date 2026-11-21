@@ -157,7 +157,7 @@ def test_campaign_brief_cannot_activate_gaming_system_rules():
 def test_long_campaign_brief_does_not_hide_gaming_preset_marker():
     instructions = (
         "CAMPAIGN BRIEF: " + ("requirements " * 250)
-        + "\\nAct as an expert gaming-stream highlights editor."
+        + "\nAct as an expert gaming-stream highlights editor."
     )
     prompt, _ = build_viral_prompt(TRANSCRIPT, 60, instructions=instructions)
     assert "GAMING HIGHLIGHT MODE" in prompt
