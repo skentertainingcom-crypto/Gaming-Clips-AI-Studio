@@ -31,7 +31,11 @@ export function validateSlug(slug, platform = 'kick') {
 export function buildPlatformTargets(plats, accounts, platMap) {
   return Object.keys(plats || {})
     .filter((k) => plats[k] && accounts?.[platMap[k]?.acct])
-    .map((k) => ({ platform: platMap[k].platform, accountId: accounts[platMap[k].acct] }));
+    .map((k) => ({
+      platform: platMap[k].platform,
+      accountId: accounts[platMap[k].acct],
+      ...(k === 'fb' ? { platformSpecificData: { contentType: 'reel' } } : {}),
+    }));
 }
 
 // Convert the form's minute fields into the seconds payload, clamped to the
