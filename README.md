@@ -23,6 +23,7 @@ do all of that automatically.
 - **Finds the best moments.** The video is transcribed, and Google Gemini
   picks and ranks self-contained clips, with a title, hook and captions for
   each. Clip edges land on sentence boundaries and silences, never mid-word.
+- **Gaming highlights.** A dedicated preset prioritizes clutch situations, close calls, reversals, skilled plays, funny mistakes and genuine reactions. Selection is grounded in the transcript and context; it does not inspect every gameplay frame, so silent visual moments may be missed.
 - **Frames them for vertical.** Active-speaker tracking keeps the person
   talking in frame, with a camera that stays still within each shot. You can
   switch a clip to subject-centred framing or to a letterboxed full frame at
