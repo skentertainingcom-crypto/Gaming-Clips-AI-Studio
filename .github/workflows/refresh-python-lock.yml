@@ -39,6 +39,7 @@ jobs:
           --index-url https://download.pytorch.org/whl/cu126
           --extra-index-url https://pypi.org/simple
           --index-strategy unsafe-best-match
+          --emit-index-url
           -o requirements.lock
 
       - name: Confirm lock resolves and audit dependencies
