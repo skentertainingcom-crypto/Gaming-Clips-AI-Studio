@@ -46,6 +46,17 @@ errors the job walks `GEMINI_FALLBACK_MODELS`; a malformed response goes
 through a five-level JSON repair chain and a bounded reformat retry. How the
 prompt writes titles and hooks, and why, is in
 [research/title-hook-copy.md](../research/title-hook-copy.md).
+
+The dashboard's **Gaming highlights** preset adds a trusted gaming-specific
+selection rubric: keep the setup, decisive beat and immediate reaction
+together; favour clutch situations, close calls, reversals, skilled plays and
+authentic reactions; reject routine gameplay and unsupported claims. The
+current Gemini request is transcript- and word-timestamp-based, not a verified
+frame-by-frame gameplay vision pass. It must not claim to have seen a kill,
+score, rank, win or on-screen event unless the available transcript/context
+actually establishes it. Sparse commentary can therefore produce fewer clips
+than a true audiovisual gameplay detector.
+
 If no AI result is available, the transcript is split by lexical TextTiling
 into several topic clips (heuristic, not ranked); rendering the whole video is
 the last resort. Live-monitor jobs disable both fallbacks: a segment with no AI

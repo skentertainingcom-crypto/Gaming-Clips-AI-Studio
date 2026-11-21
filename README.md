@@ -6,8 +6,8 @@
   <p><b>Turn long videos into vertical shorts, on your own machine.</b></p>
 
   <p>
-    <a href="https://github.com/fralapo/clippyme/actions/workflows/ci.yml"><img src="https://github.com/fralapo/clippyme/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI" /></a>
-    <img src="https://img.shields.io/github/license/fralapo/clippyme?color=3b82f6" alt="MIT license" />
+    <a href="https://github.com/skentertainingcom-crypto/Gaming-Clips-AI-Studio/actions/workflows/ci.yml"><img src="https://github.com/skentertainingcom-crypto/Gaming-Clips-AI-Studio/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI" /></a>
+    <img src="https://img.shields.io/github/license/skentertainingcom-crypto/Gaming-Clips-AI-Studio?color=3b82f6" alt="MIT license" />
     <img src="https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white" alt="Python 3.11" />
   </p>
 </div>
@@ -15,7 +15,7 @@
 ClippyMe is a self-hosted web app for creators and editors. Give it a YouTube
 link or a video file; it finds the moments worth sharing, cuts them into 9:16
 clips with captions, and lets you polish and publish them to TikTok,
-Instagram and YouTube. It can also watch Kick, Twitch and YouTube channels and
+Instagram, YouTube and Facebook Reels. It can also watch Kick, Twitch and YouTube channels and
 do all of that automatically.
 
 ## What it does
@@ -23,6 +23,7 @@ do all of that automatically.
 - **Finds the best moments.** The video is transcribed, and Google Gemini
   picks and ranks self-contained clips, with a title, hook and captions for
   each. Clip edges land on sentence boundaries and silences, never mid-word.
+- **Gaming highlights.** A dedicated preset prioritizes clutch situations, close calls, reversals, skilled plays, funny mistakes and genuine reactions. Selection is grounded in the transcript and context; it does not inspect every gameplay frame, so silent visual moments may be missed.
 - **Frames them for vertical.** Active-speaker tracking keeps the person
   talking in frame, with a camera that stays still within each shot. You can
   switch a clip to subject-centred framing or to a letterboxed full frame at
@@ -60,8 +61,8 @@ overview](docs/architecture/overview.md) explains the design.
 You need Docker with Compose v2. Then:
 
 ```bash
-git clone https://github.com/fralapo/clippyme.git
-cd clippyme
+git clone https://github.com/skentertainingcom-crypto/Gaming-Clips-AI-Studio.git
+cd Gaming-Clips-AI-Studio
 docker compose up --build
 ```
 

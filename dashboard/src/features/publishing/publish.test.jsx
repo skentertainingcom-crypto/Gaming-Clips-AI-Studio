@@ -63,6 +63,23 @@ test('Publish now sends now, even though the scheduling switch defaults to on', 
   expect(screen.queryByText('Clip scheduled')).toBeNull();
 });
 
+test('Facebook Reels can be selected and is sent as a Facebook target', async () => {
+  vi.mocked(getZernio).mockResolvedValue({
+    configured: true, accounts: { facebook: 'facebook-account' }, timezone: 'Asia/Kolkata',
+  });
+  mount();
+  await waitFor(() => expect(screen.getByRole('button', { name: /Facebook Reels/ })).toBeEnabled());
+  const facebook = screen.getByRole('button', { name: /Facebook Reels/ });
+  fireEvent.click(facebook);
+  const publishNow = screen.getByRole('button', { name: 'Publish now' });
+  await waitFor(() => expect(publishNow).toBeEnabled());
+  fireEvent.click(publishNow);
+  await waitFor(() => expect(publishClip).toHaveBeenCalledTimes(1));
+  expect(publishClip.mock.calls[0][2].platforms).toEqual([
+    { platform: 'facebook', accountId: 'facebook-account', platformSpecificData: { contentType: 'reel' } },
+  ]);
+});
+
 test('Schedule keeps auto mode and gives each batch clip its own day', async () => {
   mount(clips);
   const scheduleButton = screen.getByRole('button', { name: 'Schedule' });

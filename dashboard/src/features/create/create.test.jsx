@@ -135,3 +135,10 @@ test('hook drawer: NotoSerif-Bold is not offered next to Default (serif); a save
   expect(hookText().fontWeight).toBe('700');
   expect(set).not.toHaveBeenCalled();
 });
+
+test('campaign brief field stores pasted campaign requirements', () => {
+  const set = mount();
+  const brief = 'Use clips under 60 seconds. Include #CampaignTag in each caption.';
+  fireEvent.change(screen.getByPlaceholderText(/Paste campaign requirements/), { target: { value: brief } });
+  expect(set).toHaveBeenLastCalledWith({ campaignBrief: brief });
+});

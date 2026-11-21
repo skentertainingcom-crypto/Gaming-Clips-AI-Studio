@@ -266,7 +266,7 @@ export function LiveMonitorView({ pushToast }) {
   const [mode, setMode] = useState('live');
   const [slug, setSlug] = useState('');
   const [touched, setTouched] = useState(false);
-  const [plats, setPlats] = useState({ tiktok: true, ig: true, yt: false });
+  const [plats, setPlats] = useState({ tiktok: true, ig: true, yt: false, fb: false });
   const [captionTemplate, setCaptionTemplate] = useState('');
   const [titleTemplate, setTitleTemplate] = useState('');
   const [instructions, setInstructions] = useState('');

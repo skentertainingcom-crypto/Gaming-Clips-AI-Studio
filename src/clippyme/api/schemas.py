@@ -246,7 +246,7 @@ def _validate_toggles(value):
 
 def validate_publish_platforms(value: List[dict]) -> List[dict]:
     """Validate the small, flat Zernio target objects forwarded downstream."""
-    allowed = {"tiktok", "instagram", "youtube"}
+    allowed = {"tiktok", "instagram", "youtube", "facebook"}
     for item in value:
         if not isinstance(item, dict):
             raise ValueError("each platform must be an object")
@@ -463,7 +463,7 @@ class ZernioConfigRequest(BaseModel):
             raise ValueError("accounts must be an object")
         if len(value) > 16:
             raise ValueError("too many account entries")
-        allowed = {"tiktok", "instagram", "youtube"}
+        allowed = {"tiktok", "instagram", "youtube", "facebook"}
         for platform, account_id in value.items():
             if platform not in allowed:
                 raise ValueError(f"unknown account platform: {platform!r}")

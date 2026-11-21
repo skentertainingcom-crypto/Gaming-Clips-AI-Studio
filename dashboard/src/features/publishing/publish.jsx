@@ -20,6 +20,7 @@ export const PLAT = {
   tiktok: { platform: 'tiktok', acct: 'tiktok', icon: 'tiktok', label: 'TikTok' },
   ig: { platform: 'instagram', acct: 'instagram', icon: 'instagram', label: 'Reels' },
   yt: { platform: 'youtube', acct: 'youtube', icon: 'youtube', label: 'Shorts' },
+  fb: { platform: 'facebook', acct: 'facebook', icon: 'facebook', label: 'Facebook Reels' },
 };
 
 function PubRow({ clip, idx, st, plats, mode }) {
@@ -62,7 +63,7 @@ function PubRow({ clip, idx, st, plats, mode }) {
 export function PublishModal({ clips, jobId, clipStates = {}, preselections, onClose, onPublished, pushToast }) {
   const all = clips.length > 1;
   const [zernio, setZernio] = useState(null);
-  const [plats, setPlats] = useState({ tiktok: true, ig: true, yt: false });
+  const [plats, setPlats] = useState({ tiktok: true, ig: true, yt: false, fb: false });
   const [schedule, setSchedule] = useState(true);
   const [exactSchedule, setExactSchedule] = useState(false);
   const [publishTime, setPublishTime] = useState('');
@@ -114,7 +115,11 @@ export function PublishModal({ clips, jobId, clipStates = {}, preselections, onC
   const toggle = (k) => setPlats((p) => ({ ...p, [k]: !p[k] }));
   const platTargets = () => Object.keys(plats)
     .filter((k) => plats[k] && accounts[PLAT[k].acct])
-    .map((k) => ({ platform: PLAT[k].platform, accountId: accounts[PLAT[k].acct] }));
+    .map((k) => ({
+      platform: PLAT[k].platform,
+      accountId: accounts[PLAT[k].acct],
+      ...(k === 'fb' ? { platformSpecificData: { contentType: 'reel' } } : {}),
+    }));
   const targets = platTargets();
   const ready = zernio?.configured && targets.length > 0;
 

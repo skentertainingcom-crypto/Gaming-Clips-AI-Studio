@@ -148,10 +148,17 @@ function SourcePanel({ opts, set }) {
       )}
 
       <div style={{ marginTop: 18, paddingTop: 18, borderTop: '1px solid var(--line-1)' }}>
+        <div className="field">
+          <span className="field-label"><Icon n="clipboard-list" style={{ color: 'var(--brand-blue)' }} /> Campaign brief &amp; rules · optional</span>
+          <textarea className="ta" rows="3" value={opts.campaignBrief || ''}
+            placeholder="Paste campaign requirements: clip length, required hashtags, captions, submission rules, prohibited content…"
+            onChange={(e) => set({ campaignBrief: e.target.value })}></textarea>
+          <div className="od" style={{ marginTop: 6 }}>Paste written campaign rules here. This does not import a campaign page or verify ownership. Only use footage you have permission to edit and submit.</div>
+        </div>
         <div className="field" style={{ marginBottom: 0 }}>
-          <span className="field-label"><Icon n="sparkles" style={{ color: 'var(--brand-blue)' }} /> AI instructions · optional</span>
-          <textarea className="ta" rows="2" value={opts.instructions}
-            placeholder="e.g. “Find the funniest moments” or “Skip the intro, focus on the demo”"
+          <span className="field-label"><Icon n="sparkles" style={{ color: 'var(--brand-blue)' }} /> Extra AI instructions · optional</span>
+          <textarea className="ta" rows="2" value={opts.instructions || ''}
+            placeholder="e.g. Find the funniest moments or focus on clean clutch plays"
             onChange={(e) => set({ instructions: e.target.value })}></textarea>
         </div>
       </div>
